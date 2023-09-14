@@ -75,10 +75,10 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-compiler:2.38.1")
     kapt("androix.hilt:hilt-compiler:1.0.0")
-    implementation("androix.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     //NAVIGATION WITH COMPOSE
-    implementation("androix.navigation:navigation-compose:2.5.2")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
 
     //PERMISSIONS
     implementation("com.google.accompanist:accompanist-permissions:0.21.1-beta")
