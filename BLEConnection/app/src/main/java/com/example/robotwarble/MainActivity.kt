@@ -25,18 +25,20 @@ class MainActivity : ComponentActivity() {
         super.onStart()
         showDialog()
     }
-
+    private var dialogShown = false
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            dialogShown = false
             if (result.resultCode != Activity.RESULT_OK) {
                 Log.i("OnBluetooth", "El bluetooth esta apagado")
                 showDialog()
             }
         }
     private fun showDialog(){
-        if(!bluetoothAdapter.isEnabled){
+        if(!bluetoothAdapter.isEnabled && !dialogShown){
             val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             resultLauncher.launch(enableBluetoothIntent)
+            dialogShown = true
         }
     }
 
