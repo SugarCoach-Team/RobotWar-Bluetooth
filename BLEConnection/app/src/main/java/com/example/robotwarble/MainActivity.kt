@@ -11,9 +11,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.robotwarble.main.BluetoothViewModel
 import com.example.robotwarble.main.MainScreen
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    var bluetoothAdapter: BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    @Inject lateinit var bluetoothAdapter: BluetoothAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModel by viewModels<BluetoothViewModel>()
@@ -25,6 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onStart()
         showDialog()
     }
+
     private var dialogShown = false
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
