@@ -1,9 +1,9 @@
-package com.example.robotwarble
+package com.example.robotwarble.main.di
 
-import android.app.Application
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import androidx.core.content.getSystemService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +17,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBluetoothAdapter(@ApplicationContext context: Context): BluetoothAdapter {
-        val manager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    fun provideBluetoothAdapter(manager: BluetoothManager): BluetoothAdapter {
         return manager.adapter
+    }
+
+    @Provides
+    @Singleton
+    fun providesBluetoothManager(@ApplicationContext context: Context): BluetoothManager{
+        return context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     }
 }
