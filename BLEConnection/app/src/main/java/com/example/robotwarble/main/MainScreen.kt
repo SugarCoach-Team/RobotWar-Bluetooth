@@ -1,24 +1,19 @@
 package com.example.robotwarble.main
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import android.bluetooth.BluetoothAdapter
+import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import com.example.robotwarble.main.permission.SystemBroadcastReceiver
 
 @Composable
-fun MainScreen (bluetoothViewModel: BluetoothViewModel) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(
-            onClick = {  }
-        ){
-            Text("INICIA")
+fun MainScreen (
+    onBluetoothStateChanged:()->Unit
+) {
+    SystemBroadcastReceiver(systemAction = BluetoothAdapter.ACTION_STATE_CHANGED){ bluetoothState ->
+        val action = bluetoothState?.action ?: return@SystemBroadcastReceiver
+        if(action == BluetoothAdapter.ACTION_STATE_CHANGED){
         }
+        Log.i("OnBroadcast", "El broadcast se ejecuta")
+        onBluetoothStateChanged()
     }
 }

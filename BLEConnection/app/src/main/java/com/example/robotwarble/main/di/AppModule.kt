@@ -17,13 +17,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBluetoothAdapter(manager: BluetoothManager): BluetoothAdapter {
+    fun provideBluetoothAdapter(@ApplicationContext context: Context): BluetoothAdapter {
+        val manager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         return manager.adapter
-    }
-
-    @Provides
-    @Singleton
-    fun providesBluetoothManager(@ApplicationContext context: Context): BluetoothManager{
-        return context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     }
 }
